@@ -1,0 +1,118 @@
+.container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 100vh;
+    padding: 1.5rem;
+    width: 100%;
+}
+
+.primary-title {
+    color: var(--primary-text-color);
+    font-size: 1.5rem;
+}
+
+.content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 40rem;
+    width: 100%;
+}
+
+.actions-area {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.input {
+    border: 2px solid var(--primary-border-color);
+    border-radius: 0.5rem;
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+    outline-color: var(--highlight-color);
+    padding: 0.75rem;
+    width: 100%;
+}
+
+.primary-button {
+    background-color: var(--highlight-color);
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0px 5px 0px #005ab3;
+    color: var(--background-color);
+}
+
+.secondary-title {
+    color: var(--primary-text-color);
+    font-size: 1.25rem;
+}
+
+.table-container {
+    border: 2px solid var(--primary-border-color);
+    border-radius: 0.5rem;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tertiary-title {
+    color: var(--primary-text-color);
+    font-size: 1rem;
+}
+
+.table-item {
+    padding: 0.75rem;
+    text-align: start;
+}
+
+.status-area {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.table-item:nth-child(2) {
+    width: 100%;
+}
+
+.table-body .table-row:first-child {
+    border-top: 2px solid var(--primary-border-color);
+}
+
+.table-body .table-row:not(:last-child) {
+    border-bottom: 2px solid var(--secondary-border-color);
+}
+
+.paragraph {
+    color: var(--secondary-text-color);
+    font-size: 0.875rem;
+    width: 100%;
+}
+
+.secondary-button {
+    background-color: transparent;
+    border: 2px solid var(--primary-border-color);
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 0px var(--primary-border-color);
+    color: var(--primary-text-color);
+}
+
+.primary-button, .secondary-button {
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: bold;
+    padding: 0.75rem;
+    transition: 0.2s;
+    transform: translateY(-5px);
+    white-space: nowrap;
+}
+
+.primary-button:active, .secondary-button:active {
+    box-shadow: none;
+    transform: translateY(0px);
+}

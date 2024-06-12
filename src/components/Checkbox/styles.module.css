@@ -1,0 +1,30 @@
+.label {
+    display: flex;
+}
+
+.input {
+    display: none;
+}
+
+.activedCheckbox {
+    background-color: #70e000;
+    border: none;
+    color: var(--background-color);
+}
+
+.disabledCheckbox {
+    background-color: transparent;
+    border: 2px solid var(--primary-border-color);
+    color: transparent;
+}
+
+.activedCheckbox, .disabledCheckbox {
+    align-items: center;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 25%;
+    height: 1.5rem;
+}
