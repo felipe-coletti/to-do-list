@@ -39,7 +39,6 @@
 .primary-button {
     background-color: var(--highlight-color);
     border: none;
-    border-radius: 0.5rem;
     box-shadow: 0px 5px 0px #005ab3;
     color: var(--background-color);
 }
@@ -96,7 +95,6 @@
 .secondary-button {
     background-color: transparent;
     border: 2px solid var(--primary-border-color);
-    border-radius: 0.5rem;
     box-shadow: 0px 4px 0px var(--primary-border-color);
     color: var(--primary-text-color);
 }
