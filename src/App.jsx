@@ -16,7 +16,7 @@ function App() {
         localStorage.setItem('data', JSON.stringify(data))
     }, [data])
 
-    const handleCreate = (newTask) => {
+    const handleCreate = () => {
         if (newTask.trim().length > 0) {
             setData((prevData) => [...prevData, { status: false, title: newTask }])
             setNewTask('')
