@@ -51,7 +51,7 @@ function App() {
 
     return (
         <div className='container'>
-            <h1 className='primary-title'>To do list</h1>
+            <h1 className='primary-title'>To-do list</h1>
             <div className='content-area'>
                 <div className='actions-area'>
                     <input
