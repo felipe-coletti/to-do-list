@@ -18,13 +18,13 @@
     color: transparent;
 }
 
-.activedCheckbox, .disabledCheckbox {
+.activedCheckbox,
+.disabledCheckbox {
     align-items: center;
-    aspect-ratio: 1 / 1;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
+    font-size: 0.875rem;
     justify-content: center;
-    padding: 25%;
-    height: 1.5rem;
+    padding: 0.5rem;
 }
