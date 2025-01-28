@@ -9,7 +9,6 @@ function App() {
         return initialValue || []
     })
     const [newTask, setNewTask] = useState('')
-    const [isEditing, setIsEditing] = useState(false)
     const [selectedTask, setSelectedTask] = useState(null)
     const [newTaskTitle, setNewTaskTitle] = useState('')
 
@@ -18,41 +17,36 @@ function App() {
     }, [data])
 
     const handleCreate = (newTask) => {
-        setData([...data, {status: false, title: newTask}])
+        if (newTask.trim().length > 0) {
+            setData((prevData) => [...prevData, { status: false, title: newTask }])
+            setNewTask('')
+        }
     }
 
     const handleEdit = (i, taskTitle) => {
-        if (!isEditing) {
-            setNewTaskTitle(taskTitle)
-
-            setSelectedTask(i)
-        } else if (selectedTask == i) {
-            let newData = data
+        if (selectedTask === i) {
+            let newData = [...data]
 
             newData[i].title = newTaskTitle
 
             setData(newData)
-
             setSelectedTask(null)
+        } else {
+            setNewTaskTitle(taskTitle)
+            setSelectedTask(i)
         }
-
-        setIsEditing(!isEditing)
-        
-        localStorage.setItem('data', JSON.stringify(data))
     }
 
     const handleDelete = (i) => {
-        setData(data.filter((item, j) => j != i))
+        setData((prevData) => prevData.filter((item, j) => j != i))
     }
 
     const handleSaveStatus = (i, newStatus) => {
-        let newData = data
+        let newData = [...data]
 
         newData[i].status = newStatus
 
         setData(newData)
-
-        localStorage.setItem('data', JSON.stringify(data))
     }
 
     return (
@@ -60,10 +54,19 @@ function App() {
             <h1 className='primary-title'>To do list</h1>
             <div className='content-area'>
                 <div className='actions-area'>
-                    <input className='input' value={newTask} onChange={e => setNewTask(e.target.value)} placeholder='Qual é sua próxima tarefa?'/>
-                    <button className='primary-button' onClick={() => newTask.length > 0 && (handleCreate(newTask), setNewTask(''))}>Adicionar tarefa</button>
+                    <input
+                        className='input'
+                        value={newTask}
+                        onChange={(e) => setNewTask(e.target.value)}
+                        placeholder='Qual é sua próxima tarefa?'
+                    />
+                    <button className='primary-button' onClick={handleCreate}>
+                        Adicionar tarefa
+                    </button>
                 </div>
-                <h2 className='secondary-title'>{data.length} {data.length == 1 ? 'tarefa' : 'tarefas'}</h2>
+                <h2 className='secondary-title'>
+                    {data.length} {data.length == 1 ? 'tarefa' : 'tarefas'}
+                </h2>
                 <div className='table-container'>
                     <table className='table'>
                         <thead className='table-header'>
@@ -84,20 +87,34 @@ function App() {
                                 <tr className='table-row' key={i}>
                                     <td className='table-item'>
                                         <div className='status-area'>
-                                            <Checkbox checked={item.status} onChange={() => handleSaveStatus(i, !item.status)}/>
+                                            <Checkbox
+                                                checked={item.status}
+                                                onChange={() => handleSaveStatus(i, !item.status)}
+                                            />
                                         </div>
                                     </td>
                                     <td className='table-item'>
-                                        {!isEditing || selectedTask != i ? (
-                                            <p className='paragraph'>{item.title}</p>
+                                        {selectedTask === i ? (
+                                            <input
+                                                className='input'
+                                                value={newTaskTitle}
+                                                onChange={(e) => setNewTaskTitle(e.target.value)}
+                                            />
                                         ) : (
-                                            <input className='input' value={newTaskTitle} onChange={e => setNewTaskTitle(e.target.value)}/>
+                                            <p className='paragraph'>{item.title}</p>
                                         )}
                                     </td>
                                     <td className='table-item'>
                                         <div className='actions-area'>
-                                            <button className='secondary-button' onClick={() => handleEdit(i, item.title, newTaskTitle)}>{!isEditing || selectedTask != i ? 'Editar' : 'Salvar'}</button>
-                                            <button className='secondary-button' onClick={() => handleDelete(i)}>Excluir</button>
+                                            <button
+                                                className='secondary-button'
+                                                onClick={() => handleEdit(i, item.title)}
+                                            >
+                                                {selectedTask === i ? 'Salvar' : 'Editar'}
+                                            </button>
+                                            <button className='secondary-button' onClick={() => handleDelete(i)}>
+                                                Excluir
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
