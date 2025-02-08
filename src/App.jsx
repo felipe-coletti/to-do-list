@@ -54,7 +54,11 @@ function App() {
     }
 
     const handleDelete = (id) => {
-        setData((prevData) => prevData.filter((item) => item.id !== id))
+        const confirmDelete = window.confirm('Você tem certeza que deseja excluir esta tarefa?')
+        
+        if (confirmDelete) {
+            setData((prevData) => prevData.filter((item) => item.id !== id))
+        }
     }
 
     const switchStatus = (id) => {
