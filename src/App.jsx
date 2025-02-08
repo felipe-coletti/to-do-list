@@ -13,38 +13,54 @@ function App() {
     const [newTaskTitle, setNewTaskTitle] = useState('')
 
     useEffect(() => {
-        localStorage.setItem('data', JSON.stringify(data))
+        const handleBeforeUnload = () => {
+            localStorage.setItem('data', JSON.stringify(data))
+        }
+    
+        window.addEventListener('beforeunload', handleBeforeUnload)
+    
+        return () => {
+            window.removeEventListener('beforeunload', handleBeforeUnload)
+        }
     }, [data])
 
     const handleCreate = () => {
         if (newTask.trim().length > 0) {
-            setData((prevData) => [...prevData, { status: false, title: newTask }])
+            setData((prevData) => [
+                ...prevData,
+                {
+                    id: data.length > 0 ? data[data.length - 1].id + 1 : 0,
+                    status: false,
+                    title: newTask 
+                }
+            ])
             setNewTask('')
         }
     }
 
-    const handleEdit = (i, taskTitle) => {
-        if (selectedTask === i) {
+    const handleEdit = (id) => {
+        if (selectedTask === id) {
             let newData = [...data]
 
-            newData[i].title = newTaskTitle
+            newData[data.indexOf(data.find((item) => item.id === id))].title = newTaskTitle
 
             setData(newData)
             setSelectedTask(null)
+            setNewTaskTitle('')
         } else {
-            setNewTaskTitle(taskTitle)
-            setSelectedTask(i)
+            setNewTaskTitle(data[data.indexOf(data.find((item) => item.id === id))].title)
+            setSelectedTask(id)
         }
     }
 
-    const handleDelete = (i) => {
-        setData((prevData) => prevData.filter((item, j) => j != i))
+    const handleDelete = (id) => {
+        setData((prevData) => prevData.filter((item) => item.id !== id))
     }
 
-    const handleSaveStatus = (i, newStatus) => {
+    const switchStatus = (id) => {
         let newData = [...data]
 
-        newData[i].status = newStatus
+        newData[data.indexOf(data.find((item) => item.id === id))].status = !data[data.indexOf(data.find((item) => item.id === id))].status
 
         setData(newData)
     }
@@ -65,7 +81,7 @@ function App() {
                     </button>
                 </div>
                 <h2 className='secondary-title'>
-                    {data.length} {data.length == 1 ? 'tarefa' : 'tarefas'}
+                    {data.length} {data.length === 1 ? 'tarefa' : 'tarefas'}
                 </h2>
                 <div className='table-container'>
                     <table className='table'>
@@ -84,17 +100,17 @@ function App() {
                         </thead>
                         <tbody className='table-body'>
                             {data.map((item, i) => (
-                                <tr className='table-row' key={i}>
+                                <tr className='table-row' key={item.id}>
                                     <td className='table-item'>
                                         <div className='status-area'>
                                             <Checkbox
                                                 checked={item.status}
-                                                onChange={() => handleSaveStatus(i, !item.status)}
+                                                onChange={() => switchStatus(item.id)}
                                             />
                                         </div>
                                     </td>
                                     <td className='table-item'>
-                                        {selectedTask === i ? (
+                                        {selectedTask === item.id ? (
                                             <input
                                                 className='input'
                                                 value={newTaskTitle}
@@ -108,11 +124,11 @@ function App() {
                                         <div className='actions-area'>
                                             <button
                                                 className='secondary-button'
-                                                onClick={() => handleEdit(i, item.title)}
+                                                onClick={() => handleEdit(item.id)}
                                             >
-                                                {selectedTask === i ? 'Salvar' : 'Editar'}
+                                                {selectedTask === item.id ? 'Salvar' : 'Editar'}
                                             </button>
-                                            <button className='secondary-button' onClick={() => handleDelete(i)}>
+                                            <button className='secondary-button' onClick={() => handleDelete(item.id)}>
                                                 Excluir
                                             </button>
                                         </div>
