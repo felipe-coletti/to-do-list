@@ -16,6 +16,7 @@ function App() {
     const [newTask, setNewTask] = useState('')
     const [selectedTask, setSelectedTask] = useState(null)
     const [newTaskTitle, setNewTaskTitle] = useState('')
+    const [filter, setFilter] = useState('all')
 
     useEffect(() => {
         const handleBeforeUnload = () => {
@@ -110,6 +111,13 @@ function App() {
         setData(newData)
     }
 
+    const filteredDisplayOrder = displayOrder.filter(id => {
+        const item = data.find(task => task.id === id)
+        if (filter === 'completed') return item.status
+        if (filter === 'pending') return !item.status
+        return true
+    })
+
     return (
         <div className='container'>
             <h1 className='primary-title'>To-do list</h1>
@@ -125,8 +133,28 @@ function App() {
                         Adicionar tarefa
                     </button>
                 </div>
+                <div className='filter'>
+                    <button
+                        className={`secondary-button ${filter === 'all' ? 'active' : ''}`}
+                        onClick={() => setFilter('all')}
+                    >
+                        Todas as tarefas
+                    </button>
+                    <button
+                        className={`secondary-button ${filter === 'completed' ? 'active' : ''}`}
+                        onClick={() => setFilter('completed')}
+                    >
+                        Tarefas concluidas
+                    </button>
+                    <button
+                        className={`secondary-button ${filter === 'pending' ? 'active' : ''}`}
+                        onClick={() => setFilter('pending')}
+                    >
+                        Tarefas não concluidas
+                    </button>
+                </div>
                 <h2 className='secondary-title'>
-                    {data.length} {data.length === 1 ? 'tarefa' : 'tarefas'}
+                    {filteredDisplayOrder.length} {filteredDisplayOrder.length === 1 ? 'tarefa' : 'tarefas'}
                 </h2>
                 <div className='table-container'>
                     <table className='table'>
@@ -137,7 +165,7 @@ function App() {
                                     <h3 className='tertiary-title'>Status</h3>
                                 </th>
                                 <th className='table-item'>
-                                    <h3 className='tertiary-title'>Nome</h3>
+                                    <h3 className='tertiary-title'>Tarefa</h3>
                                 </th>
                                 <th className='table-item'>
                                     <h3 className='tertiary-title'>Ações</h3>
@@ -145,26 +173,30 @@ function App() {
                             </tr>
                         </thead>
                         <tbody className='table-body'>
-                            {displayOrder.map((id) => {
-                                const item = data.find((task) => task.id === id)
+                            {filteredDisplayOrder.map((id, i) => {
+                                const item = data.find(task => task.id === id)
+
+                                if (!item) return null
 
                                 return (
                                     <tr className='table-row' key={item.id}>
                                         <td className='table-item'>
-                                            <button
-                                                className='secondary-button'
-                                                onClick={() => handleMoveUp(item.id)}
-                                                disabled={displayOrder.indexOf(item.id) === 0}
-                                            >
-                                                <Icon icon="oui:arrow-up" />
-                                            </button>
-                                            <button
-                                                className='secondary-button'
-                                                onClick={() => handleMoveDown(item.id)}
-                                                disabled={displayOrder.indexOf(item.id) === displayOrder.length - 1}
-                                            >
-                                                <Icon icon="oui:arrow-down" />
-                                            </button>
+                                            <div className='actions-area'>
+                                                <button
+                                                    className='secondary-button'
+                                                    onClick={() => handleMoveUp(item.id)}
+                                                    disabled={i === 0}
+                                                >
+                                                    <Icon icon="oui:arrow-up" />
+                                                </button>
+                                                <button
+                                                    className='secondary-button'
+                                                    onClick={() => handleMoveDown(item.id)}
+                                                    disabled={i === filteredDisplayOrder.length - 1}
+                                                >
+                                                    <Icon icon="oui:arrow-down" />
+                                                </button>
+                                            </div>
                                         </td>
                                         <td className='table-item'>
                                             <div className='status-area'>
