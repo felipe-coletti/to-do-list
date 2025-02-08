@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Checkbox from './components/Checkbox'
+import { Icon } from "@iconify/react"
 
 function App() {
     const [data, setData] = useState(() => {
         const saved = localStorage.getItem('data')
         const initialValue = JSON.parse(saved)
         return initialValue || []
+    })
+    const [displayOrder, setDisplayOrder] = useState(() => {
+        const savedOrder = localStorage.getItem('displayOrder')
+        return savedOrder ? JSON.parse(savedOrder) : data.map(item => item.id)
     })
     const [newTask, setNewTask] = useState('')
     const [selectedTask, setSelectedTask] = useState(null)
@@ -15,6 +20,7 @@ function App() {
     useEffect(() => {
         const handleBeforeUnload = () => {
             localStorage.setItem('data', JSON.stringify(data))
+            localStorage.setItem('displayOrder', JSON.stringify(displayOrder))
         }
     
         window.addEventListener('beforeunload', handleBeforeUnload)
@@ -22,19 +28,53 @@ function App() {
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload)
         }
-    }, [data])
+    }, [data, displayOrder])
 
     const handleCreate = () => {
+        let newItem = {
+            id: data.length > 0 ? data[data.length - 1].id + 1 : 0,
+            status: false,
+            title: newTask 
+        }
+        
         if (newTask.trim().length > 0) {
             setData((prevData) => [
                 ...prevData,
-                {
-                    id: data.length > 0 ? data[data.length - 1].id + 1 : 0,
-                    status: false,
-                    title: newTask 
-                }
+                newItem
+            ])
+            setDisplayOrder((prevData) => [
+                ...prevData,
+                newItem.id
             ])
             setNewTask('')
+        }
+    }
+
+    const handleMoveUp = (id) => {
+        let index = displayOrder.indexOf(id)
+
+        if (index > 0) {
+            let newOrder = [...displayOrder]
+
+            let temp = newOrder[index]
+            newOrder[index] = newOrder[index - 1]
+            newOrder[index - 1] = temp
+
+            setDisplayOrder(newOrder)
+        }
+    }
+    
+    const handleMoveDown = (id) => {
+        let index = displayOrder.indexOf(id)
+
+        if (index < displayOrder.length - 1) {
+            let newOrder = [...displayOrder]
+
+            let temp = newOrder[index]
+            newOrder[index] = newOrder[index + 1]
+            newOrder[index + 1] = temp
+
+            setDisplayOrder(newOrder)
         }
     }
 
@@ -58,6 +98,7 @@ function App() {
         
         if (confirmDelete) {
             setData((prevData) => prevData.filter((item) => item.id !== id))
+            setDisplayOrder((prevData) => prevData.filter((item) => item !== id))
         }
     }
 
@@ -91,6 +132,7 @@ function App() {
                     <table className='table'>
                         <thead className='table-header'>
                             <tr>
+                                <th className='table-item'></th>
                                 <th className='table-item'>
                                     <h3 className='tertiary-title'>Status</h3>
                                 </th>
@@ -103,42 +145,62 @@ function App() {
                             </tr>
                         </thead>
                         <tbody className='table-body'>
-                            {data.map((item, i) => (
-                                <tr className='table-row' key={item.id}>
-                                    <td className='table-item'>
-                                        <div className='status-area'>
-                                            <Checkbox
-                                                checked={item.status}
-                                                onChange={() => switchStatus(item.id)}
-                                            />
-                                        </div>
-                                    </td>
-                                    <td className='table-item'>
-                                        {selectedTask === item.id ? (
-                                            <input
-                                                className='input'
-                                                value={newTaskTitle}
-                                                onChange={(e) => setNewTaskTitle(e.target.value)}
-                                            />
-                                        ) : (
-                                            <p className='paragraph'>{item.title}</p>
-                                        )}
-                                    </td>
-                                    <td className='table-item'>
-                                        <div className='actions-area'>
+                            {displayOrder.map((id) => {
+                                const item = data.find((task) => task.id === id)
+
+                                return (
+                                    <tr className='table-row' key={item.id}>
+                                        <td className='table-item'>
                                             <button
                                                 className='secondary-button'
-                                                onClick={() => handleEdit(item.id)}
+                                                onClick={() => handleMoveUp(item.id)}
+                                                disabled={displayOrder.indexOf(item.id) === 0}
                                             >
-                                                {selectedTask === item.id ? 'Salvar' : 'Editar'}
+                                                <Icon icon="oui:arrow-up" />
                                             </button>
-                                            <button className='secondary-button' onClick={() => handleDelete(item.id)}>
-                                                Excluir
+                                            <button
+                                                className='secondary-button'
+                                                onClick={() => handleMoveDown(item.id)}
+                                                disabled={displayOrder.indexOf(item.id) === displayOrder.length - 1}
+                                            >
+                                                <Icon icon="oui:arrow-down" />
                                             </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
+                                        </td>
+                                        <td className='table-item'>
+                                            <div className='status-area'>
+                                                <Checkbox
+                                                    checked={item.status}
+                                                    onChange={() => switchStatus(item.id)}
+                                                />
+                                            </div>
+                                        </td>
+                                        <td className='table-item'>
+                                            {selectedTask === item.id ? (
+                                                <input
+                                                    className='input'
+                                                    value={newTaskTitle}
+                                                    onChange={(e) => setNewTaskTitle(e.target.value)}
+                                                />
+                                            ) : (
+                                                <p className='paragraph'>{item.title}</p>
+                                            )}
+                                        </td>
+                                        <td className='table-item'>
+                                            <div className='actions-area'>
+                                                <button
+                                                    className='secondary-button'
+                                                    onClick={() => handleEdit(item.id)}
+                                                >
+                                                    {selectedTask === item.id ? 'Salvar' : 'Editar'}
+                                                </button>
+                                                <button className='secondary-button' onClick={() => handleDelete(item.id)}>
+                                                    Excluir
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </div>
