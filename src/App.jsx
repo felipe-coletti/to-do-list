@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import Checkbox from './components/Checkbox'
-import { Icon } from "@iconify/react"
+import { Button } from './components/Button'
+import { Checkbox } from './components/Checkbox'
+import { Input } from './components/Input'
+import { Icon } from '@iconify/react'
 
 function App() {
     const [data, setData] = useState(() => {
@@ -11,7 +13,7 @@ function App() {
     })
     const [displayOrder, setDisplayOrder] = useState(() => {
         const savedOrder = localStorage.getItem('displayOrder')
-        return savedOrder ? JSON.parse(savedOrder) : data.map(item => item.id)
+        return savedOrder ? JSON.parse(savedOrder) : data.map((item) => item.id)
     })
     const [newTask, setNewTask] = useState('')
     const [selectedTask, setSelectedTask] = useState(null)
@@ -23,9 +25,9 @@ function App() {
             localStorage.setItem('data', JSON.stringify(data))
             localStorage.setItem('displayOrder', JSON.stringify(displayOrder))
         }
-    
+
         window.addEventListener('beforeunload', handleBeforeUnload)
-    
+
         return () => {
             window.removeEventListener('beforeunload', handleBeforeUnload)
         }
@@ -35,18 +37,12 @@ function App() {
         let newItem = {
             id: data.length > 0 ? data[data.length - 1].id + 1 : 0,
             status: false,
-            title: newTask 
+            title: newTask,
         }
-        
+
         if (newTask.trim().length > 0) {
-            setData((prevData) => [
-                ...prevData,
-                newItem
-            ])
-            setDisplayOrder((prevData) => [
-                ...prevData,
-                newItem.id
-            ])
+            setData((prevData) => [...prevData, newItem])
+            setDisplayOrder((prevData) => [...prevData, newItem.id])
             setNewTask('')
         }
     }
@@ -64,7 +60,7 @@ function App() {
             setDisplayOrder(newOrder)
         }
     }
-    
+
     const handleMoveDown = (id) => {
         let index = displayOrder.indexOf(id)
 
@@ -96,7 +92,7 @@ function App() {
 
     const handleDelete = (id) => {
         const confirmDelete = window.confirm('Você tem certeza que deseja excluir esta tarefa?')
-        
+
         if (confirmDelete) {
             setData((prevData) => prevData.filter((item) => item.id !== id))
             setDisplayOrder((prevData) => prevData.filter((item) => item !== id))
@@ -106,13 +102,14 @@ function App() {
     const switchStatus = (id) => {
         let newData = [...data]
 
-        newData[data.indexOf(data.find((item) => item.id === id))].status = !data[data.indexOf(data.find((item) => item.id === id))].status
+        newData[data.indexOf(data.find((item) => item.id === id))].status =
+            !data[data.indexOf(data.find((item) => item.id === id))].status
 
         setData(newData)
     }
 
-    const filteredDisplayOrder = displayOrder.filter(id => {
-        const item = data.find(task => task.id === id)
+    const filteredDisplayOrder = displayOrder.filter((id) => {
+        const item = data.find((task) => task.id === id)
         if (filter === 'completed') return item.status
         if (filter === 'pending') return !item.status
         return true
@@ -123,35 +120,25 @@ function App() {
             <h1 className='primary-title'>To-do list</h1>
             <div className='content-area'>
                 <div className='actions-area'>
-                    <input
-                        className='input'
+                    <Input
                         value={newTask}
                         onChange={(e) => setNewTask(e.target.value)}
                         placeholder='Qual é sua próxima tarefa?'
                     />
-                    <button className='primary-button' onClick={handleCreate}>
+                    <Button variant='primary' onClick={handleCreate}>
                         Adicionar tarefa
-                    </button>
+                    </Button>
                 </div>
                 <div className='filter'>
-                    <button
-                        className={`secondary-button ${filter === 'all' ? 'active' : ''}`}
-                        onClick={() => setFilter('all')}
-                    >
+                    <Button variant='secondary' active={filter === 'all'} onClick={() => setFilter('all')}>
                         Todas as tarefas
-                    </button>
-                    <button
-                        className={`secondary-button ${filter === 'completed' ? 'active' : ''}`}
-                        onClick={() => setFilter('completed')}
-                    >
+                    </Button>
+                    <Button variant='secondary' active={filter === 'completed'} onClick={() => setFilter('completed')}>
                         Tarefas concluidas
-                    </button>
-                    <button
-                        className={`secondary-button ${filter === 'pending' ? 'active' : ''}`}
-                        onClick={() => setFilter('pending')}
-                    >
+                    </Button>
+                    <Button variant='secondary' active={filter === 'pending'} onClick={() => setFilter('pending')}>
                         Tarefas não concluidas
-                    </button>
+                    </Button>
                 </div>
                 <h2 className='secondary-title'>
                     {filteredDisplayOrder.length} {filteredDisplayOrder.length === 1 ? 'tarefa' : 'tarefas'}
@@ -174,7 +161,7 @@ function App() {
                         </thead>
                         <tbody className='table-body'>
                             {filteredDisplayOrder.map((id, i) => {
-                                const item = data.find(task => task.id === id)
+                                const item = data.find((task) => task.id === id)
 
                                 if (!item) return null
 
@@ -182,20 +169,20 @@ function App() {
                                     <tr className='table-row' key={item.id}>
                                         <td className='table-item'>
                                             <div className='actions-area'>
-                                                <button
-                                                    className='secondary-button'
+                                                <Button
+                                                    variant='secondary'
                                                     onClick={() => handleMoveUp(item.id)}
                                                     disabled={i === 0}
                                                 >
-                                                    <Icon icon="oui:arrow-up" />
-                                                </button>
-                                                <button
-                                                    className='secondary-button'
+                                                    <Icon icon='oui:arrow-up' />
+                                                </Button>
+                                                <Button
+                                                    variant='secondary'
                                                     onClick={() => handleMoveDown(item.id)}
                                                     disabled={i === filteredDisplayOrder.length - 1}
                                                 >
-                                                    <Icon icon="oui:arrow-down" />
-                                                </button>
+                                                    <Icon icon='oui:arrow-down' />
+                                                </Button>
                                             </div>
                                         </td>
                                         <td className='table-item'>
@@ -208,8 +195,7 @@ function App() {
                                         </td>
                                         <td className='table-item'>
                                             {selectedTask === item.id ? (
-                                                <input
-                                                    className='input'
+                                                <Input
                                                     value={newTaskTitle}
                                                     onChange={(e) => setNewTaskTitle(e.target.value)}
                                                 />
@@ -219,15 +205,12 @@ function App() {
                                         </td>
                                         <td className='table-item'>
                                             <div className='actions-area'>
-                                                <button
-                                                    className='secondary-button'
-                                                    onClick={() => handleEdit(item.id)}
-                                                >
+                                                <Button variant='secondary' onClick={() => handleEdit(item.id)}>
                                                     {selectedTask === item.id ? 'Salvar' : 'Editar'}
-                                                </button>
-                                                <button className='secondary-button' onClick={() => handleDelete(item.id)}>
+                                                </Button>
+                                                <Button variant='secondary' onClick={() => handleDelete(item.id)}>
                                                     Excluir
-                                                </button>
+                                                </Button>
                                             </div>
                                         </td>
                                     </tr>

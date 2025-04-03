@@ -1,0 +1,36 @@
+.primaryButton {
+    background-color: var(--highlight-color);
+    border: none;
+    box-shadow: 0px 5px 0px #005ab3;
+    color: var(--background-color);
+}
+
+.secondaryButton {
+    background-color: transparent;
+    border: 2px solid var(--primary-border-color);
+    box-shadow: 0px 4px 0px var(--primary-border-color);
+    color: var(--primary-text-color);
+}
+
+.button {
+    border-radius: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    font-size: 0.875rem;
+    font-weight: bold;
+    justify-content: center;
+    margin-bottom: 5px;
+    padding: 0.5rem;
+    transition: 0.2s;
+    white-space: nowrap;
+}
+
+.button:not(:disabled):active,
+.active {
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+.button:disabled {
+    opacity: 0.3;
+}

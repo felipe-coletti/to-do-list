@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
 
-const Checkbox = ({ checked, onChange }) => {
+export const Checkbox = ({ checked, onChange }) => {
     const [isChecked, setIsChecked] = useState(checked != null ? checked : false)
 
     const handleChange = () => {
@@ -27,5 +27,3 @@ const Checkbox = ({ checked, onChange }) => {
         </label>
     )
 }
-
-export default Checkbox
