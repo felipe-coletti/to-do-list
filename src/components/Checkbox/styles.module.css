@@ -7,14 +7,14 @@
 }
 
 .activedCheckbox {
-    background-color: var(--positive-color);
-    border: 2px solid var(--positive-color);
-    color: var(--background-color);
+    background-color: var(--color-positive);
+    border: 2px solid var(--color-positive);
+    color: var(--color-background);
 }
 
 .disabledCheckbox {
     background-color: transparent;
-    border: 2px solid var(--primary-border-color);
+    border: 2px solid var(--color-primary-border);
     color: transparent;
 }
 

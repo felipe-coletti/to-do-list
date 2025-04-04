@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
 import styles from './styles.module.css'
+import { Button } from '../Button'
 import { Icon } from '@iconify/react'
 
 export const Modal = ({ isOpen, onClose, children }) => {
-    if (!isOpen) return null
-
     useEffect(() => {
         if (isOpen) {
             const handleEsc = (event) => {
@@ -21,15 +20,17 @@ export const Modal = ({ isOpen, onClose, children }) => {
         }
     }, [isOpen, onClose])
 
+    if (!isOpen) return null
+
     return (
         <div className={styles.modalContainer}>
             <div className={styles.container}>
                 <div className={styles.backdrop} onClick={onClose}></div>
                 <div className={styles.contentArea}>
                     <div className={styles.topArea}>
-                        <button className={styles.button} title='Fechar' onClick={onClose}>
+                        <Button variant='ghost' title='Fechar' onClick={onClose}>
                             <Icon icon='tabler:x' />
-                        </button>
+                        </Button>
                     </div>
                     {children}
                 </div>

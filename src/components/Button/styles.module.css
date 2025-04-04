@@ -1,31 +1,45 @@
 .primaryButton {
-    background-color: var(--highlight-color);
+    background-color: var(--color-highlight);
     border: none;
     box-shadow: 0px 5px 0px #005ab3;
-    color: var(--background-color);
+    color: var(--color-background);
 }
 
 .secondaryButton {
     background-color: transparent;
-    border: 2px solid var(--primary-border-color);
-    box-shadow: 0px 4px 0px var(--primary-border-color);
-    color: var(--primary-text-color);
+    border: 2px solid var(--color-primary-border);
+    box-shadow: 0px 4px 0px var(--color-primary-border);
+    color: var(--color-primary-text);
+}
+
+.primaryButton,
+.secondaryButton {
+    margin-bottom: 5px;
+}
+
+.ghostButton {
+    background-color: transparent;
+    border: none;
+}
+
+.ghostButton:not(:disabled):hover {
+    background-color: var(--color-hover);
 }
 
 .button {
+    align-items: center;
     border-radius: 0.5rem;
     cursor: pointer;
     display: flex;
     font-size: 0.875rem;
     font-weight: bold;
     justify-content: center;
-    margin-bottom: 5px;
     padding: 0.5rem;
     transition: 0.2s;
     white-space: nowrap;
 }
 
-.button:not(:disabled):active,
+:where(.primaryButton, .secondaryButton):not(:disabled):active,
 .active {
     box-shadow: none;
     transform: translateY(4px);

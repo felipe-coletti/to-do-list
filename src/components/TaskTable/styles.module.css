@@ -1,0 +1,44 @@
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tertiaryTitle {
+    color: var(--color-primary-text);
+    font-size: 1rem;
+}
+
+.tableItem {
+    padding: 0.5rem;
+    text-align: start;
+}
+
+.statusArea {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.tableItem:first-child .actions-area {
+    flex-direction: column;
+}
+
+.tableItem:nth-child(3) {
+    width: 100%;
+}
+
+.tableBody .tableRow:first-child {
+    border-top: 2px solid var(--color-primary-border);
+}
+
+.tableBody .tableRow:not(:last-child) {
+    border-bottom: 2px solid var(--color-secondary-border);
+}
+
+.floatingActionButton {
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    bottom: 1.5rem;
+    position: fixed;
+    right: 1.5rem;
+}

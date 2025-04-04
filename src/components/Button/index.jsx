@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 
-export const Button = ({ variant = 'primary', onClick, active, disabled = false, children }) => {
+export const Button = ({ variant = 'primary', title, onClick, active, disabled = false, className, children }) => {
     let style
 
     switch (variant) {
@@ -9,11 +9,16 @@ export const Button = ({ variant = 'primary', onClick, active, disabled = false,
             break
         case 'secondary':
             style = styles.secondaryButton
+            break
+        case 'ghost':
+            style = styles.ghostButton
     }
 
     return (
         <button
-            className={`${style} ${styles.button}${active ? ` ${styles.active}` : ''}`}
+            className={`${style} ${styles.button}${active ? ` ${styles.active}` : ''}
+            ${className ? ` ${className}` : ''}`}
+            title={title}
             onClick={onClick}
             disabled={disabled}
         >
