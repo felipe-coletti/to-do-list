@@ -41,10 +41,14 @@
     width: 100%;
 }
 
-.topArea {
+.modalHeader {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modalFooter {
+    align-items: center;
     display: flex;
     justify-content: right;
-    position: absolute;
-    right: 1.5rem;
-    top: 1.5rem;
 }

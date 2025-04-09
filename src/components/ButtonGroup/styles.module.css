@@ -1,0 +1,8 @@
+.buttonGroup {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.verticalButtonGroup {
+    flex-direction: column;
+}

@@ -7,8 +7,8 @@
 }
 
 .activedCheckbox {
-    background-color: var(--color-positive);
-    border: 2px solid var(--color-positive);
+    background-color: var(--color-accent);
+    border: 2px solid var(--color-accent);
     color: var(--color-background);
 }
 

@@ -1,7 +1,7 @@
 :root {
-    --color-backdrop: #00000030;
+    --color-accent: #0072e3;
+    --color-backdrop: #00000045;
     --color-background: #fff;
-    --color-highlight: #0072e3;
     --color-hover: #00000015;
     --color-positive: #adc178;
     --color-primary-border: #ccc;
@@ -29,11 +29,8 @@ body {
 .paragraph {
     color: var(--color-secondary-text);
     font-size: 0.875rem;
-    width: 100%;
 }
 
-.actions-area {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: right;
+.icon {
+    font-size: 1.25rem;
 }

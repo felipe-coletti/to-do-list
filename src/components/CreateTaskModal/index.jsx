@@ -3,6 +3,8 @@ import { Button } from '../Button'
 import { Input } from '../Input'
 import { Modal } from '../Modal'
 import { useTasks } from '../../context/TaskContext'
+import { ModalTitle } from '../Modal/ModalTitle'
+import { ButtonGroup } from '../ButtonGroup'
 
 export const CreateTaskModal = ({ isOpen, onClose }) => {
     const { addTask } = useTasks()
@@ -17,12 +19,17 @@ export const CreateTaskModal = ({ isOpen, onClose }) => {
     }
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
-            <h2 className='secondary-title'>Adicionar Tarefa</h2>
+        <Modal.Root isOpen={isOpen} onClose={onClose}>
+            <Modal.Title onClose={onClose}>Adicionar tarefa</Modal.Title>
             <Input label='Título' value={title} onChange={(e) => setTitle(e.target.value)} />
-            <div className='actions-area'>
-                <Button onClick={handleAddTask}>Adicionar</Button>
-            </div>
-        </Modal>
+            <Modal.Footer>
+                <ButtonGroup>
+                    <Button variant='secondary' onClick={onClose}>
+                        Cancelar
+                    </Button>
+                    <Button onClick={handleAddTask}>Adicionar</Button>
+                </ButtonGroup>
+            </Modal.Footer>
+        </Modal.Root>
     )
 }

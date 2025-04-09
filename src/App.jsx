@@ -38,9 +38,7 @@ function App() {
                 <h2 className='secondary-title'>
                     {filteredDisplayOrder.length} {filteredDisplayOrder.length === 1 ? 'tarefa' : 'tarefas'}
                 </h2>
-                <div className={styles.tableContainer}>
-                    <TaskTable displayData={filteredDisplayOrder} />
-                </div>
+                <TaskTable data={filteredDisplayOrder} />
             </div>
         </div>
     )
