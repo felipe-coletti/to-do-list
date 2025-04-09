@@ -26,7 +26,7 @@ export const UpdateTaskModal = ({ isOpen, onClose, taskId }) => {
 
     return (
         <Modal.Root isOpen={isOpen} onClose={onClose}>
-            <Modal.Title onClose={onClose}>Editar tarefa</Modal.Title>
+            <Modal.Title>Editar tarefa</Modal.Title>
             <Input label='Título' value={newTitle} onChange={(e) => setNewTitle(e.target.value)} />
             <Modal.Footer>
                 <ButtonGroup>

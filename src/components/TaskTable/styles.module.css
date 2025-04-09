@@ -1,5 +1,7 @@
 .taskList {
+    height: 100%;
     list-style: none;
+    overflow-y: auto;
 }
 
 .task {
@@ -17,4 +19,5 @@
     bottom: 1.5rem;
     position: fixed;
     right: 1.5rem;
+    z-index: 2;
 }

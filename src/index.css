@@ -2,12 +2,11 @@
     --color-accent: #0072e3;
     --color-backdrop: #00000045;
     --color-background: #fff;
-    --color-hover: #00000015;
-    --color-positive: #adc178;
-    --color-primary-border: #ccc;
+    --color-border: #ccc;
+    --color-hover: #00000010;
     --color-primary-text: #3b3b3b;
-    --color-secondary-border: #e4e4e4;
     --color-secondary-text: #585858;
+    --color-shadow: #75757520;
 }
 
 * {

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import styles from './styles.module.css'
+import { ModalContext } from '../../context/ModalContext'
 
 export const ModalRoot = ({ isOpen, onClose, children }) => {
     useEffect(() => {
@@ -20,12 +21,19 @@ export const ModalRoot = ({ isOpen, onClose, children }) => {
 
     if (!isOpen) return null
 
+    const handleOverlayClick = (e) => {
+        if (e.target === e.currentTarget) {
+            onClose?.()
+        }
+    }
+
     return (
-        <div className={styles.modalContainer}>
-            <div className={styles.container}>
-                <div className={styles.backdrop} onClick={onClose}></div>
-                <div className={styles.contentArea}>{children}</div>
+        <ModalContext.Provider value={{ onClose }}>
+            <div className={styles.modalContainer}>
+                <div className={styles.backdrop} onClick={handleOverlayClick}>
+                    <div className={styles.modal}>{children}</div>
+                </div>
             </div>
-        </div>
+        </ModalContext.Provider>
     )
 }

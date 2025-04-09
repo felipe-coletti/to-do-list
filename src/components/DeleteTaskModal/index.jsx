@@ -14,7 +14,7 @@ export const DeleteTaskModal = ({ isOpen, onClose, taskId }) => {
 
     return (
         <Modal.Root isOpen={isOpen} onClose={onClose}>
-            <Modal.Title onClose={onClose}>Excluir tarefa</Modal.Title>
+            <Modal.Title>Excluir tarefa</Modal.Title>
             <p className='paragraph'>Tem certeza de que deseja excluir essa tarefa?</p>
             <Modal.Footer>
                 <ButtonGroup>

@@ -8,6 +8,7 @@ import { UpdateTaskModal } from '../UpdateTaskModal'
 import { DeleteTaskModal } from '../DeleteTaskModal'
 import { Icon } from '@iconify/react'
 import { ButtonGroup } from '../ButtonGroup'
+import { Dropdown } from '../Dropdown'
 
 export const TaskTable = ({ data }) => {
     const { getTaskById, toggleTaskStatus, moveTaskUp, moveTaskDown } = useTasks()
@@ -18,7 +19,7 @@ export const TaskTable = ({ data }) => {
 
     const openModal = (action, taskId = null) => {
         setAction(action)
-        selectedTask != taskId && setSelectedTask(taskId)
+        if (selectedTask !== taskId) setSelectedTask(taskId)
         setOpen(true)
     }
 
@@ -27,6 +28,19 @@ export const TaskTable = ({ data }) => {
         setAction(null)
         setSelectedTask(null)
     }
+
+    const actions = [
+        {
+            icon: <Icon className='icon' icon='material-symbols:edit' />,
+            label: 'Editar',
+            action: (taskId) => openModal('update', taskId),
+        },
+        {
+            icon: <Icon className='icon' icon='material-symbols:delete' />,
+            label: 'Excluir',
+            action: (taskId) => openModal('delete', taskId),
+        },
+    ]
 
     return (
         <ul className={styles.taskList}>
@@ -38,33 +52,36 @@ export const TaskTable = ({ data }) => {
                 return (
                     <li className={styles.task} key={task.id}>
                         <ButtonGroup direction='vertical'>
-                            <Button variant='ghost' onClick={() => moveTaskUp(task.id)} disabled={i === 0}>
-                                <Icon className='icon' icon='oui:arrow-up' />
-                            </Button>
+                            <Button
+                                variant='ghost'
+                                onClick={() => moveTaskUp(task.id)}
+                                disabled={i === 0}
+                                icon={<Icon className='icon' icon='oui:arrow-up' />}
+                            />
                             <Button
                                 variant='ghost'
                                 onClick={() => moveTaskDown(task.id)}
                                 disabled={i === data.length - 1}
-                            >
-                                <Icon className='icon' icon='oui:arrow-down' />
-                            </Button>
+                                icon={<Icon className='icon' icon='oui:arrow-down' />}
+                            />
                         </ButtonGroup>
                         <Checkbox checked={task.status} onChange={() => toggleTaskStatus(task.id)} />
                         <p className='paragraph'>{task.title}</p>
-                        <ButtonGroup>
-                            <Button variant='ghost' onClick={() => openModal('update', task.id)}>
-                                <Icon className='icon' icon='material-symbols:edit' />
-                            </Button>
-                            <Button variant='ghost' onClick={() => openModal('delete', task.id)}>
-                                <Icon className='icon' icon='material-symbols:delete' />
-                            </Button>
-                        </ButtonGroup>
+                        <Dropdown
+                            options={actions.map((action) => ({
+                                ...action,
+                                action: () => action.action(task.id),
+                            }))}
+                            icon={<Icon className='icon' icon='mi:options-vertical' />}
+                        />
                     </li>
                 )
             })}
-            <Button className={styles.floatingActionButton} onClick={() => openModal('create')}>
-                <Icon className='icon' icon='ic:round-plus' />
-            </Button>
+            <Button
+                className={styles.floatingActionButton}
+                onClick={() => openModal('create')}
+                icon={<Icon className='icon' icon='ic:round-plus' />}
+            />
             <CreateTaskModal isOpen={open && action === 'create'} onClose={closeModal} />
             <UpdateTaskModal isOpen={open && action === 'update'} onClose={closeModal} taskId={selectedTask} />
             <DeleteTaskModal isOpen={open && action === 'delete'} onClose={closeModal} taskId={selectedTask} />

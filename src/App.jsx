@@ -1,44 +1,91 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './App.module.css'
-import { Button } from './components/Button'
 import { useTasks } from './context/TaskContext'
 import { TaskTable } from './components/TaskTable'
 import { Input } from './components/Input'
+import { Select } from './components/Select'
 
 function App() {
     const { displayOrder, getTaskById } = useTasks()
     const [filter, setFilter] = useState('all')
     const [query, setQuery] = useState('')
+    const [displayData, setDisplayData] = useState(displayOrder)
 
-    const filteredDisplayOrder = displayOrder
-        .filter((id) => {
-            const item = getTaskById(id)
-            if (!item) return false
-            if (filter === 'completed') return item.status
-            if (filter === 'pending') return !item.status
-            return true
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && onSearch) {
+            onSearch()
+        }
+    }
+
+    const onSearch = () => {
+        if (!query.trim()) {
+            setDisplayData(displayOrder)
+            return
+        }
+
+        const filtered = displayOrder.filter((id) => {
+            const task = getTaskById(id)
+            return task?.title.toLowerCase().includes(query.toLowerCase())
         })
-        .filter((id) => {
-            const item = getTaskById(id)
-            return item?.title.toLowerCase().includes(query.toLowerCase())
-        })
+
+        setDisplayData(filtered)
+    }
+
+    const filteredDisplayData = displayData.filter((id) => {
+        const item = getTaskById(id)
+
+        if (!item) return false
+
+        switch (filter) {
+            case 'completed':
+                return item.status
+            case 'pending':
+                return !item.status
+            default:
+                return true
+        }
+    })
+
+    useEffect(() => {
+        if (query === '') {
+            setDisplayData(displayOrder)
+        }
+    }, [query, displayOrder])
+
+    const filters = [
+        {
+            label: 'Todas',
+            action: () => setFilter('all'),
+        },
+        {
+            label: 'Concluídas',
+            action: () => setFilter('completed'),
+        },
+        {
+            label: 'Pendentes',
+            action: () => setFilter('pending'),
+        },
+    ]
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.primaryTitle}>To-Do List</h1>
-            <div className={styles.contentArea}>
-                <Input placeholder='Buscar' value={query} onChange={(e) => setQuery(e.target.value)} />
-                <div className={styles.filter}>
-                    {['all', 'completed', 'pending'].map((type) => (
-                        <Button key={type} variant='secondary' active={filter === type} onClick={() => setFilter(type)}>
-                            {type === 'all' ? 'Todas' : type === 'completed' ? 'Concluídas' : 'Não concluídas'}
-                        </Button>
-                    ))}
-                </div>
-                <h2 className='secondary-title'>
-                    {filteredDisplayOrder.length} {filteredDisplayOrder.length === 1 ? 'tarefa' : 'tarefas'}
-                </h2>
-                <TaskTable data={filteredDisplayOrder} />
+            <div className={styles.content}>
+                <header className={styles.header}>
+                    <h1 className={styles.primaryTitle}>To-Do List</h1>
+                    <Input
+                        placeholder='Buscar'
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                    />
+                    <div className={styles.toolBar}>
+                        <h2 className='secondary-title'>
+                            {filteredDisplayData.length} {filteredDisplayData.length === 1 ? 'tarefa' : 'tarefas'}
+                        </h2>
+                        <Select options={filters} defaultValue={0} />
+                    </div>
+                </header>
+                <TaskTable data={filteredDisplayData} />
             </div>
         </div>
     )
