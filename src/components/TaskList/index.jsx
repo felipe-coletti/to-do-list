@@ -27,12 +27,10 @@ export const TaskList = ({ data }) => {
         setSelectedTask(null)
     }
 
-    return (
+    return data.length > 0 ? (
         <ul className={styles.taskList}>
             {data.map((id, i) => {
                 const task = getTaskById(id)
-
-                if (!task) return null
 
                 return (
                     <li className={styles.task} key={task.id}>
@@ -52,21 +50,27 @@ export const TaskList = ({ data }) => {
                         </ButtonGroup>
                         <Checkbox checked={task.status} onChange={() => toggleTaskStatus(task.id)} />
                         <p className='paragraph'>{task.title}</p>
-                        <Button
-                            variant='ghost'
-                            onClick={() => openModal('update', task.id)}
-                            icon={<Icon className='icon' icon='material-symbols:edit' />}
-                        />
-                        <Button
-                            variant='ghost'
-                            onClick={() => openModal('delete', task.id)}
-                            icon={<Icon className='icon' icon='material-symbols:delete' />}
-                        />
+                        <div className='button-group'>
+                            <Button
+                                variant='ghost'
+                                onClick={() => openModal('update', task.id)}
+                                icon={<Icon className='icon' icon='material-symbols:edit' />}
+                            />
+                            <Button
+                                variant='ghost'
+                                onClick={() => openModal('delete', task.id)}
+                                icon={<Icon className='icon' icon='material-symbols:delete' />}
+                            />
+                        </div>
                     </li>
                 )
             })}
             <UpdateTaskModal isOpen={open && action === 'update'} onClose={closeModal} taskId={selectedTask} />
             <DeleteTaskModal isOpen={open && action === 'delete'} onClose={closeModal} taskId={selectedTask} />
         </ul>
+    ) : (
+        <div className={styles.emptyList}>
+            <p className='paragraph'>Nenhuma tarefa encontrada</p>
+        </div>
     )
 }
