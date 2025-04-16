@@ -3,14 +3,12 @@ import styles from './styles.module.css'
 import { useTasks } from '../../context/TaskContext'
 import { Button } from '../Button'
 import { Checkbox } from '../Checkbox'
-import { CreateTaskModal } from '../CreateTaskModal'
 import { UpdateTaskModal } from '../UpdateTaskModal'
 import { DeleteTaskModal } from '../DeleteTaskModal'
 import { Icon } from '@iconify/react'
 import { ButtonGroup } from '../ButtonGroup'
-import { Dropdown } from '../Dropdown'
 
-export const TaskTable = ({ data }) => {
+export const TaskList = ({ data }) => {
     const { getTaskById, toggleTaskStatus, moveTaskUp, moveTaskDown } = useTasks()
 
     const [action, setAction] = useState(null)
@@ -28,19 +26,6 @@ export const TaskTable = ({ data }) => {
         setAction(null)
         setSelectedTask(null)
     }
-
-    const actions = [
-        {
-            icon: <Icon className='icon' icon='material-symbols:edit' />,
-            label: 'Editar',
-            action: (taskId) => openModal('update', taskId),
-        },
-        {
-            icon: <Icon className='icon' icon='material-symbols:delete' />,
-            label: 'Excluir',
-            action: (taskId) => openModal('delete', taskId),
-        },
-    ]
 
     return (
         <ul className={styles.taskList}>
@@ -67,22 +52,19 @@ export const TaskTable = ({ data }) => {
                         </ButtonGroup>
                         <Checkbox checked={task.status} onChange={() => toggleTaskStatus(task.id)} />
                         <p className='paragraph'>{task.title}</p>
-                        <Dropdown
-                            options={actions.map((action) => ({
-                                ...action,
-                                action: () => action.action(task.id),
-                            }))}
-                            icon={<Icon className='icon' icon='mi:options-vertical' />}
+                        <Button
+                            variant='ghost'
+                            onClick={() => openModal('update', task.id)}
+                            icon={<Icon className='icon' icon='material-symbols:edit' />}
+                        />
+                        <Button
+                            variant='ghost'
+                            onClick={() => openModal('delete', task.id)}
+                            icon={<Icon className='icon' icon='material-symbols:delete' />}
                         />
                     </li>
                 )
             })}
-            <Button
-                className={styles.floatingActionButton}
-                onClick={() => openModal('create')}
-                icon={<Icon className='icon' icon='ic:round-plus' />}
-            />
-            <CreateTaskModal isOpen={open && action === 'create'} onClose={closeModal} />
             <UpdateTaskModal isOpen={open && action === 'update'} onClose={closeModal} taskId={selectedTask} />
             <DeleteTaskModal isOpen={open && action === 'delete'} onClose={closeModal} taskId={selectedTask} />
         </ul>

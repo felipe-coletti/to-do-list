@@ -14,10 +14,3 @@
 .task > :nth-child(3) {
     width: 100%;
 }
-
-.floatingActionButton {
-    bottom: 1.5rem;
-    position: fixed;
-    right: 1.5rem;
-    z-index: 2;
-}

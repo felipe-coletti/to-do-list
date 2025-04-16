@@ -38,3 +38,19 @@
     display: flex;
     justify-content: space-between;
 }
+
+.emptyList {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+.floatingActionButton {
+    bottom: 1.5rem;
+    box-shadow: 0 0 5px 2px var(--color-shadow);
+    position: fixed;
+    right: 1.5rem;
+    z-index: 2;
+}

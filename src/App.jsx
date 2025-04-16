@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
 import styles from './App.module.css'
 import { useTasks } from './context/TaskContext'
-import { TaskTable } from './components/TaskTable'
+import { TaskList } from './components/TaskList'
 import { Input } from './components/Input'
 import { Select } from './components/Select'
+import { CreateTaskModal } from './components/CreateTaskModal'
+import { Button } from './components/Button'
+import { Icon } from '@iconify/react'
 
 function App() {
     const { displayOrder, getTaskById } = useTasks()
     const [filter, setFilter] = useState('all')
     const [query, setQuery] = useState('')
     const [displayData, setDisplayData] = useState(displayOrder)
+    const [open, setOpen] = useState(false)
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter' && onSearch) {
@@ -67,6 +71,17 @@ function App() {
         },
     ]
 
+    const getErrorMessage = (filter) => {
+        switch (filter) {
+            case 'all':
+                return 'Você ainda não tem tarefas cadastradas'
+            case 'completed':
+                return 'Não há tarefas concluidas'
+            case 'pending':
+                return 'Não há tarefas pendentes'
+        }
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.content}>
@@ -85,8 +100,20 @@ function App() {
                         <Select options={filters} defaultValue={0} />
                     </div>
                 </header>
-                <TaskTable data={filteredDisplayData} />
+                {filteredDisplayData.length > 0 ? (
+                    <TaskList data={filteredDisplayData} />
+                ) : (
+                    <div className={styles.emptyList}>
+                        <p className='paragraph'>{getErrorMessage(filter)}</p>
+                    </div>
+                )}
             </div>
+            <Button
+                className={styles.floatingActionButton}
+                onClick={() => setOpen(true)}
+                icon={<Icon className='icon' icon='ic:round-plus' />}
+            />
+            <CreateTaskModal isOpen={open} onClose={() => setOpen(false)} />
         </div>
     )
 }
