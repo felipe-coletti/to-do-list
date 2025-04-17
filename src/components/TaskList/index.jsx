@@ -1,12 +1,8 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
 import { useTasks } from '../../context/TaskContext'
-import { Button } from '../Button'
-import { Checkbox } from '../Checkbox'
-import { UpdateTaskModal } from '../UpdateTaskModal'
-import { DeleteTaskModal } from '../DeleteTaskModal'
+import { Button, ButtonGroup, Checkbox, DeleteTaskModal, UpdateTaskModal } from '../'
 import { Icon } from '@iconify/react'
-import { ButtonGroup } from '../ButtonGroup'
 
 export const TaskList = ({ data }) => {
     const { getTaskById, toggleTaskStatus, moveTaskUp, moveTaskDown } = useTasks()
@@ -50,7 +46,7 @@ export const TaskList = ({ data }) => {
                         </ButtonGroup>
                         <Checkbox checked={task.status} onChange={() => toggleTaskStatus(task.id)} />
                         <p className='paragraph'>{task.title}</p>
-                        <div className='button-group'>
+                        <ButtonGroup>
                             <Button
                                 variant='ghost'
                                 onClick={() => openModal('update', task.id)}
@@ -61,7 +57,7 @@ export const TaskList = ({ data }) => {
                                 onClick={() => openModal('delete', task.id)}
                                 icon={<Icon className='icon' icon='material-symbols:delete' />}
                             />
-                        </div>
+                        </ButtonGroup>
                     </li>
                 )
             })}

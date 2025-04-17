@@ -33,9 +33,3 @@ body {
 .icon {
     font-size: 1.25rem;
 }
-
-.button-group {
-    align-items: center;
-    display: flex;
-    gap: 0.5rem;
-}

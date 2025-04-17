@@ -1,10 +1,7 @@
 import { useState, useEffect } from 'react'
 import styles from './App.module.css'
 import { useTasks } from './context/TaskContext'
-import { TaskList } from './components/TaskList'
-import { Input } from './components/Input'
-import { Button } from './components/Button'
-import { CreateTaskModal } from './components/CreateTaskModal'
+import { Button, ButtonGroup, CreateTaskModal, Input, TaskList } from './components'
 import { Icon } from '@iconify/react'
 
 function App() {
@@ -88,7 +85,7 @@ function App() {
                         onChange={(e) => setQuery(e.target.value)}
                         onKeyDown={handleKeyDown}
                     />
-                    <div className='button-group'>
+                    <ButtonGroup>
                         {filters.map((filter, i) => (
                             <button
                                 className={`${selectedFilter === filter.value ? styles.active : ''} ${styles.chip}`}
@@ -98,7 +95,7 @@ function App() {
                                 {filter.label}
                             </button>
                         ))}
-                    </div>
+                    </ButtonGroup>
                 </header>
                 <TaskList data={filteredDisplayData} />
             </div>
