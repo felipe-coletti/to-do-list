@@ -1,35 +1,35 @@
 :root {
-    --color-accent: #0072e3;
-    --color-backdrop: #00000045;
-    --color-background: #fff;
-    --color-border: #ccc;
-    --color-hover: #00000010;
-    --color-primary-text: #3b3b3b;
-    --color-secondary-text: #585858;
-    --color-shadow: #75757520;
+	--color-accent: #0072e3;
+	--color-backdrop: #00000045;
+	--color-background: #fff;
+	--color-border: #ccc;
+	--color-hover: #00000010;
+	--color-shadow: #75757520;
+	--color-text-primary: #3b3b3b;
+	--color-text-secondary: #585858;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    background-color: var(--color-background);
+	background-color: var(--color-background);
 }
 
 .secondary-title {
-    color: var(--color-primary-text);
-    font-size: 1.25rem;
+	color: var(--color-text-primary);
+	font-size: 1.25rem;
 }
 
 .paragraph {
-    color: var(--color-secondary-text);
-    font-size: 0.875rem;
+	color: var(--color-text-secondary);
+	font-size: 0.875rem;
 }
 
 .icon {
-    font-size: 1.25rem;
+	font-size: 1.25rem;
 }

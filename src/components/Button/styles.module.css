@@ -1,42 +1,42 @@
 .primaryButton {
-    background-color: var(--color-accent);
-    border: none;
-    color: var(--color-background);
+	background-color: var(--color-accent);
+	border: none;
+	color: var(--color-background);
 }
 
 .secondaryButton {
-    background-color: transparent;
-    border: 1px solid var(--color-border);
-    color: var(--color-primary-text);
+	background-color: transparent;
+	border: 1px solid var(--color-border);
+	color: var(--color-text-primary);
 }
 
 .ghostButton {
-    background-color: transparent;
-    border: none;
+	background-color: transparent;
+	border: none;
 }
 
 .ghostButton:not(:disabled):hover {
-    background-color: var(--color-hover);
+	background-color: var(--color-hover);
 }
 
 .button {
-    align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    font-size: 0.875rem;
-    font-weight: bold;
-    justify-content: center;
-    padding: 0.5rem;
-    transition: 0.2s;
-    white-space: nowrap;
+	align-items: center;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	font-size: 0.875rem;
+	font-weight: bold;
+	justify-content: center;
+	padding: 0.5rem;
+	transition: 0.2s;
+	white-space: nowrap;
 }
 
 .button:disabled {
-    cursor: not-allowed;
-    opacity: 0.3;
+	cursor: not-allowed;
+	opacity: 0.3;
 }
 
 .textButton {
-    border-radius: 0.5rem;
+	border-radius: 0.5rem;
 }

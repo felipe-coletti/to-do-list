@@ -1,63 +1,63 @@
 .container {
-    align-items: center;
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    padding: 1.5rem;
-    width: 100%;
+	align-items: center;
+	display: flex;
+	height: 100vh;
+	justify-content: center;
+	padding: 1.5rem;
+	width: 100%;
 }
 
 .content {
-    box-shadow: 0 0 5px 2px var(--color-shadow);
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    max-width: 56rem;
-    width: 100%;
+	box-shadow: 0 0 5px 2px var(--color-shadow);
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	max-width: 56rem;
+	width: 100%;
 }
 
 .header {
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem;
-    width: 100%;
+	background-color: var(--color-background);
+	border-bottom: 1px solid var(--color-border);
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1.5rem;
+	width: 100%;
 }
 
 .toolBar {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
 }
 
 .primaryTitle {
-    color: var(--color-primary-text);
-    font-size: 1.5rem;
+	color: var(--color-text-primary);
+	font-size: 1.5rem;
 }
 
 .chip {
-    background-color: transparent;
-    border: 1px solid var(--color-border);
-    border-radius: 0.5rem;
-    color: var(--color-primary-text);
-    cursor: pointer;
-    padding: 0.5rem;
+	background-color: transparent;
+	border: 1px solid var(--color-border);
+	border-radius: 0.5rem;
+	color: var(--color-text-primary);
+	cursor: pointer;
+	padding: 0.5rem;
 }
 
 .active {
-    background-color: var(--color-accent);
-    border: none;
-    color: var(--color-background);
+	background-color: var(--color-accent);
+	border: none;
+	color: var(--color-background);
 }
 
 @media screen and (max-width: 800px) {
-    .container {
-        padding: 0;
-    }
+	.container {
+		padding: 0;
+	}
 
-    .content {
-        box-shadow: none;
-    }
+	.content {
+		box-shadow: none;
+	}
 }
