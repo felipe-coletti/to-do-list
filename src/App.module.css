@@ -8,15 +8,17 @@
 }
 
 .content {
+	background-color: var(--color-background);
+	border-radius: 0.75rem;
 	box-shadow: 0 0 5px 2px var(--color-shadow);
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	overflow: hidden;
 	width: min(100%, 56rem);
 }
 
 .header {
-	background-color: var(--color-background);
 	border-bottom: 1px solid var(--color-border);
 	display: flex;
 	flex-direction: column;
