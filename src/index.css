@@ -1,12 +1,9 @@
 :root {
-	--color-accent: #0072e3;
 	--color-backdrop: #00000045;
 	--color-background: #fff;
-	--color-border: #ccc;
+	--color-foreground: #000;
 	--color-hover: #00000010;
 	--color-shadow: #75757520;
-	--color-text-primary: #3b3b3b;
-	--color-text-secondary: #585858;
 }
 
 * {
@@ -21,12 +18,12 @@ body {
 }
 
 .secondary-title {
-	color: var(--color-text-primary);
+	color: var(--color-foreground);
 	font-size: 1.25rem;
 }
 
 .paragraph {
-	color: var(--color-text-secondary);
+	color: var(--color-foreground);
 	font-size: 0.875rem;
 }
 
