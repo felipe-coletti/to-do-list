@@ -16,11 +16,6 @@ body {
 	background-color: var(--color-background);
 }
 
-.secondary-title {
-	color: var(--color-foreground);
-	font-size: 1.25rem;
-}
-
 .paragraph {
 	color: var(--color-foreground);
 	font-size: 0.875rem;
