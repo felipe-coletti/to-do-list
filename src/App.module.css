@@ -10,7 +10,7 @@
 .content {
 	background-color: var(--color-background);
 	border-radius: 0.5rem;
-	box-shadow: 0 0 5px 2px var(--color-shadow);
+	border: 2px solid var(--color-foreground);
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -59,6 +59,6 @@
 	}
 
 	.content {
-		box-shadow: none;
+		border: none;
 	}
 }
