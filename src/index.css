@@ -3,8 +3,8 @@
 	--color-background: #000;
 	--color-background-soft: #00000095;
 	--color-foreground: #fff;
-	--color-foreground-hover: #ffffff20;
-	--color-foreground-soft: #ffffff30;
+	--color-foreground-hover: #ffffff10;
+	--color-foreground-soft: #ffffff20;
 }
 
 * {
