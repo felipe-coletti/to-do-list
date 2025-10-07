@@ -1,5 +1,6 @@
 .heading {
 	color: var(--color-foreground);
+	text-transform: uppercase;
 }
 
 .medium {

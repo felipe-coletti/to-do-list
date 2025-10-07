@@ -4,6 +4,7 @@ import { useTasks } from './context/TaskContext'
 import { Button, ButtonGroup, CreateTaskModal, Input, TaskList } from './components'
 import { Icon } from '@iconify/react'
 import { Heading } from './components/Heading'
+import { Divider } from './components/Divider'
 
 function App() {
 	const { displayOrder, getTaskById } = useTasks()
@@ -77,7 +78,7 @@ function App() {
 							To-Do List
 						</Heading>
 						<Button
-							variant='ghost'
+							variant='secondary'
 							onClick={() => setOpen(true)}
 							icon={<Icon className='icon' icon='ic:round-plus' />}
 						/>
@@ -100,6 +101,7 @@ function App() {
 						))}
 					</ButtonGroup>
 				</header>
+				<Divider />
 				<TaskList data={filteredDisplayData} />
 			</div>
 			<CreateTaskModal isOpen={open} onClose={() => setOpen(false)} />

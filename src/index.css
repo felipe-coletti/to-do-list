@@ -1,8 +1,10 @@
 :root {
-	--color-backdrop: #00000045;
-	--color-background: #fff;
-	--color-foreground: #000;
-	--color-hover: #00000010;
+	--color-backdrop: #ffffff45;
+	--color-background: #000;
+	--color-background-soft: #00000095;
+	--color-foreground: #fff;
+	--color-foreground-hover: #ffffff20;
+	--color-foreground-soft: #ffffff30;
 }
 
 * {
@@ -14,6 +16,20 @@
 
 body {
 	background-color: var(--color-background);
+}
+
+::-webkit-scrollbar {
+	width: 4px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-foreground-soft);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--color-foreground);
+	border-radius: 4px;
 }
 
 .paragraph {

@@ -12,7 +12,12 @@ export const ModalTitle = ({ children }) => {
 			<Heading as='h1' size='large'>
 				{children}
 			</Heading>
-			<Button variant='ghost' title='Fechar' onClick={onClose} icon={<Icon className='icon' icon='tabler:x' />} />
+			<Button
+				variant='secondary'
+				title='Fechar'
+				onClick={onClose}
+				icon={<Icon className='icon' icon='tabler:x' />}
+			/>
 		</div>
 	)
 }
