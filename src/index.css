@@ -24,12 +24,10 @@ body {
 
 ::-webkit-scrollbar-track {
 	background: var(--color-foreground-soft);
-	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
 	background-color: var(--color-foreground);
-	border-radius: 4px;
 }
 
 .paragraph {
