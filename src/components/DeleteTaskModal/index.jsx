@@ -1,29 +1,29 @@
-import { useState } from 'react'
 import { Button } from '../Button'
-import { Modal } from '../Modal'
-import { useTasks } from '../../context/TaskContext'
 import { ButtonGroup } from '../ButtonGroup'
+import { Modal } from '../Modal'
+import { Text } from '../Text'
+import { useTasks } from '../../context/TaskContext'
 
 export const DeleteTaskModal = ({ isOpen, onClose, taskId }) => {
-    const { deleteTask } = useTasks()
+	const { deleteTask } = useTasks()
 
-    const handleDelete = () => {
-        deleteTask(taskId)
-        onClose()
-    }
+	const handleDelete = () => {
+		deleteTask(taskId)
+		onClose()
+	}
 
-    return (
-        <Modal.Root isOpen={isOpen} onClose={onClose}>
-            <Modal.Title>Excluir tarefa</Modal.Title>
-            <p className='paragraph'>Tem certeza de que deseja excluir essa tarefa?</p>
-            <Modal.Footer>
-                <ButtonGroup>
-                    <Button variant='secondary' onClick={onClose}>
-                        Cancelar
-                    </Button>
-                    <Button onClick={handleDelete}>Excluir</Button>
-                </ButtonGroup>
-            </Modal.Footer>
-        </Modal.Root>
-    )
+	return (
+		<Modal.Root isOpen={isOpen} onClose={onClose}>
+			<Modal.Title>Excluir tarefa</Modal.Title>
+			<Text>Tem certeza de que deseja excluir essa tarefa?</Text>
+			<Modal.Footer>
+				<ButtonGroup>
+					<Button variant='secondary' onClick={onClose}>
+						Cancelar
+					</Button>
+					<Button onClick={handleDelete}>Excluir</Button>
+				</ButtonGroup>
+			</Modal.Footer>
+		</Modal.Root>
+	)
 }

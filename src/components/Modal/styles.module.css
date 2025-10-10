@@ -10,7 +10,7 @@
 
 .backdrop {
 	align-items: center;
-	backdrop-filter: blur(4px);
+	background-color: var(--color-background-soft);
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -23,8 +23,6 @@
 }
 
 .modal {
-	background-color: var(--color-foreground-soft);
-	border: 1px solid var(--color-foreground);
 	display: flex;
 	flex-direction: column;
 	gap: 1.25rem;

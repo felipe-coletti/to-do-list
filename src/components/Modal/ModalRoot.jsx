@@ -1,39 +1,40 @@
 import { useEffect } from 'react'
 import styles from './styles.module.css'
 import { ModalContext } from '../../context/ModalContext'
+import { Box } from '../Box'
 
 export const ModalRoot = ({ isOpen, onClose, children }) => {
-    useEffect(() => {
-        if (isOpen) {
-            const handleEsc = (event) => {
-                if (event.key === 'Escape') {
-                    onClose()
-                }
-            }
+	useEffect(() => {
+		if (isOpen) {
+			const handleEsc = event => {
+				if (event.key === 'Escape') {
+					onClose()
+				}
+			}
 
-            window.addEventListener('keydown', handleEsc)
+			window.addEventListener('keydown', handleEsc)
 
-            return () => {
-                window.removeEventListener('keydown', handleEsc)
-            }
-        }
-    }, [isOpen, onClose])
+			return () => {
+				window.removeEventListener('keydown', handleEsc)
+			}
+		}
+	}, [isOpen, onClose])
 
-    if (!isOpen) return null
+	if (!isOpen) return null
 
-    const handleOverlayClick = (e) => {
-        if (e.target === e.currentTarget) {
-            onClose?.()
-        }
-    }
+	const handleOverlayClick = e => {
+		if (e.target === e.currentTarget) {
+			onClose?.()
+		}
+	}
 
-    return (
-        <ModalContext.Provider value={{ onClose }}>
-            <div className={styles.modalContainer}>
-                <div className={styles.backdrop} onClick={handleOverlayClick}>
-                    <div className={styles.modal}>{children}</div>
-                </div>
-            </div>
-        </ModalContext.Provider>
-    )
+	return (
+		<ModalContext.Provider value={{ onClose }}>
+			<div className={styles.modalContainer}>
+				<div className={styles.backdrop} onClick={handleOverlayClick}>
+					<Box className={styles.modal}>{children}</Box>
+				</div>
+			</div>
+		</ModalContext.Provider>
+	)
 }

@@ -1,5 +1,6 @@
 .heading {
 	color: var(--color-foreground);
+	text-shadow: var(--neon-text);
 	text-transform: uppercase;
 }
 

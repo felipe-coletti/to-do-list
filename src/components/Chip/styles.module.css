@@ -1,0 +1,19 @@
+.chip {
+	background-color: transparent;
+	border: 1px solid var(--color-foreground);
+	box-shadow: var(--neon-box);
+	color: var(--color-foreground);
+	cursor: pointer;
+	font-weight: bold;
+	padding: 0.5rem;
+	text-shadow: var(--neon-text);
+	text-transform: uppercase;
+}
+
+.chip:hover {
+	background-color: var(--color-foreground-hover);
+}
+
+.chip.active {
+	background-color: var(--color-foreground-soft);
+}

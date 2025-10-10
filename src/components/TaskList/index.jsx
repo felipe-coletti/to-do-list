@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
 import { useTasks } from '../../context/TaskContext'
-import { Button, ButtonGroup, Checkbox, DeleteTaskModal, UpdateTaskModal } from '../'
-import { Icon } from '@iconify/react'
+import { Button, ButtonGroup, Checkbox, DeleteTaskModal, Icon, Text, UpdateTaskModal } from '../'
 
 export const TaskList = ({ data }) => {
 	const { getTaskById, toggleTaskStatus, moveTaskUp, moveTaskDown } = useTasks()
@@ -35,27 +34,27 @@ export const TaskList = ({ data }) => {
 								variant='secondary'
 								onClick={() => moveTaskUp(task.id)}
 								disabled={i === 0}
-								icon={<Icon className='icon' icon='oui:arrow-up' />}
+								icon={<Icon icon='oui:arrow-up' />}
 							/>
 							<Button
 								variant='secondary'
 								onClick={() => moveTaskDown(task.id)}
 								disabled={i === data.length - 1}
-								icon={<Icon className='icon' icon='oui:arrow-down' />}
+								icon={<Icon icon='oui:arrow-down' />}
 							/>
 						</ButtonGroup>
 						<Checkbox checked={task.status} onChange={() => toggleTaskStatus(task.id)} />
-						<p className='paragraph'>{task.title}</p>
+						<Text>{task.title}</Text>
 						<ButtonGroup>
 							<Button
 								variant='secondary'
 								onClick={() => openModal('update', task.id)}
-								icon={<Icon className='icon' icon='material-symbols:edit' />}
+								icon={<Icon icon='material-symbols:edit' />}
 							/>
 							<Button
 								variant='secondary'
 								onClick={() => openModal('delete', task.id)}
-								icon={<Icon className='icon' icon='material-symbols:delete' />}
+								icon={<Icon icon='material-symbols:delete' />}
 							/>
 						</ButtonGroup>
 					</li>
@@ -66,7 +65,7 @@ export const TaskList = ({ data }) => {
 		</ul>
 	) : (
 		<div className={styles.emptyList}>
-			<p className='paragraph'>Nenhuma tarefa encontrada</p>
+			<Text>Nenhuma tarefa encontrada</Text>
 		</div>
 	)
 }

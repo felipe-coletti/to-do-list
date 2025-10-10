@@ -1,0 +1,5 @@
+.text {
+	color: var(--color-foreground);
+	font-size: 0.875rem;
+	text-shadow: var(--neon-text);
+}

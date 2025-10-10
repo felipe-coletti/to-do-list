@@ -5,6 +5,8 @@
 	--color-foreground: #fff;
 	--color-foreground-hover: #ffffff10;
 	--color-foreground-soft: #ffffff20;
+	--neon-box: 0 0 2px var(--color-foreground), inset 0 0 2px var(--color-foreground);
+	--neon-text: 0 0 2px var(--color-foreground);
 }
 
 * {
@@ -28,13 +30,5 @@ body {
 
 ::-webkit-scrollbar-thumb {
 	background-color: var(--color-foreground);
-}
-
-.paragraph {
-	color: var(--color-foreground);
-	font-size: 0.875rem;
-}
-
-.icon {
-	font-size: 1.25rem;
+	box-shadow: var(--neon-box);
 }
