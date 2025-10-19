@@ -20,7 +20,6 @@
 	cursor: pointer;
 	display: flex;
 	font-size: 0.875rem;
-	font-weight: bold;
 	justify-content: center;
 	padding: 0.5rem;
 	text-shadow: var(--neon-text);

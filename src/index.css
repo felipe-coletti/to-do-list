@@ -5,8 +5,8 @@
 	--color-foreground: #fff;
 	--color-foreground-hover: #ffffff10;
 	--color-foreground-soft: #ffffff20;
-	--neon-box: 0 0 2px var(--color-foreground), inset 0 0 2px var(--color-foreground);
-	--neon-text: 0 0 2px var(--color-foreground);
+	--neon-box: 0 0 3px var(--color-foreground), inset 0 0 3px var(--color-foreground);
+	--neon-text: 0 0 3px var(--color-foreground);
 }
 
 * {

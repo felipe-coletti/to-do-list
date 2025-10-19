@@ -23,6 +23,7 @@
 }
 
 .modal {
+	background-color: var(--color-foreground-soft);
 	display: flex;
 	flex-direction: column;
 	gap: 1.25rem;
