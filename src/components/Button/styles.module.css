@@ -1,7 +1,7 @@
 .primaryButton {
 	background-color: var(--color-foreground);
 	border: none;
-	color: var(--color-background-soft);
+	color: var(--color-background);
 }
 
 .secondaryButton {

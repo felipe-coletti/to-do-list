@@ -23,8 +23,6 @@
 }
 
 .modal {
-	backdrop-filter: blur(4px);
-	background-color: var(--color-foreground-soft);
 	display: flex;
 	flex-direction: column;
 	gap: 1.25rem;
