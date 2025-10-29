@@ -1,5 +1,0 @@
-.box {
-	background-color: var(--color-background);
-	border: 1px solid var(--color-foreground);
-	box-shadow: var(--neon-box);
-}

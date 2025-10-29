@@ -1,10 +1,9 @@
 :root {
-	--color-backdrop: #ffffff45;
 	--color-background: #000;
 	--color-background-soft: #00000095;
 	--color-foreground: #fff;
-	--color-foreground-hover: #ffffff10;
-	--color-foreground-soft: #ffffff20;
+	--color-foreground-hover: #ffffff25;
+	--color-foreground-soft: #ffffff40;
 	--neon-box: 0 0 3px var(--color-foreground), inset 0 0 3px var(--color-foreground);
 	--neon-text: 0 0 3px var(--color-foreground);
 }
@@ -22,12 +21,19 @@ body {
 
 ::-webkit-scrollbar {
 	width: 4px;
+::-webkit-scrollbar {
+	width: 4px;
 }
 
 ::-webkit-scrollbar-track {
 	background: var(--color-foreground-soft);
+::-webkit-scrollbar-track {
+	background: var(--color-foreground-soft);
 }
 
+::-webkit-scrollbar-thumb {
+	background-color: var(--color-foreground);
+	box-shadow: var(--neon-box);
 ::-webkit-scrollbar-thumb {
 	background-color: var(--color-foreground);
 	box-shadow: var(--neon-box);

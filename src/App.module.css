@@ -36,6 +36,7 @@
 	}
 
 	.content {
-		border: none;
+		--box-border: none;
+		--box-shadow: none;
 	}
 }
